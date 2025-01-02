@@ -1,15 +1,14 @@
-import { useSearchContext } from 'common/search/search-context';
-import { PLAY_DOC_LINK } from 'constants';
-import LogoLight from 'images/img-logo-light.svg';
+import { PLAY_DOC_LINK } from 'constants/index';
+import LogoLight from './LogoLight';
 import { BsGithub } from 'react-icons/bs';
 import { FaDiscord, FaLinkedin, FaMeetup } from 'react-icons/fa';
 import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { IoAddSharp, IoLogoRss } from 'react-icons/io5';
 import { MdManageSearch } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import SharePlayButton from './SharePlayButton';
 
 const ExtendedFooter = () => {
-  const { showShareModal, setShowShareModal } = useSearchContext();
   const navLinks = [
     {
       name: 'Twitter',
@@ -61,7 +60,7 @@ const ExtendedFooter = () => {
         <div className="body-primary">
           <h3>
             <span className="sr-only">ReactPlay</span>
-            <img alt="Logo of ReactPlay" src={LogoLight} />
+            <LogoLight />
           </h3>
           <p className="p-lg">An open-source project made with ❤️ by team ReactPlay.</p>
           <div>
@@ -112,7 +111,7 @@ const ExtendedFooter = () => {
               <IoAddSharp className="icon" />
               <span className="btn-label">Create</span>
             </a>
-            <Link className="btn-default-light" to="/plays">
+            <Link className="btn-default-light" href="/plays">
               <MdManageSearch className="icon" />
               <span className="btn-label">Browse</span>
             </Link>
@@ -174,13 +173,7 @@ const ExtendedFooter = () => {
             Enjoying ReactPlay? Please help us spreading the word You can share about ReactPlay on
             any of your favorite social media platforms.
           </p>
-          <button
-            className="home-anchor home-anchor-sm"
-            href="#"
-            onClick={() => setShowShareModal(!showShareModal)}
-          >
-            <span className="text">Share about ReactPlay</span>
-          </button>
+          <SharePlayButton />
           <p className="mt-10 mb-2">
             Your support means a lot to us. Want to be our Sponsor and support us?
           </p>

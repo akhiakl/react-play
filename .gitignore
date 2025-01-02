@@ -48,3 +48,8 @@ cypress/e2e/play.cy.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Next js
+.next
+next-env.d.ts
+certificates

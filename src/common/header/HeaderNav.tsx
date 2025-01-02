@@ -1,19 +1,21 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { MouseEventHandler, useState } from 'react';
+import Link from 'next/link';
 import { BsGithub, BsTrophyFill } from 'react-icons/bs';
 import { FaLightbulb } from 'react-icons/fa';
 import { FaXTwitter, FaDiscord } from 'react-icons/fa6';
 import { BiMoney } from 'react-icons/bi';
 import { IoAddSharp, IoShareSocial, IoHeartSharp } from 'react-icons/io5';
 import { MdManageSearch, MdClose, MdEvent } from 'react-icons/md';
-import SocialShare from 'common/components/SocialShare';
-import { GoX } from 'react-icons/go';
-import { Modal, Box, Typography, Menu } from '@mui/material';
+import { Box, Menu } from '@mui/material';
+import { PLAY_DOC_LINK, UMAMI_EVENTS } from 'constants/index';
 import { useSearchContext } from 'common/search/search-context';
-import { PLAY_DOC_LINK, UMAMI_EVENTS } from 'constants';
 
-const HeaderNav = ({ showBrowse }) => {
-  const { showShareModal, setShowShareModal } = useSearchContext();
+type Props = {
+  showBrowse?: boolean;
+};
+
+const HeaderNav = ({ showBrowse }: Props) => {
+  const { setShowShareModal } = useSearchContext();
 
   const [showToggleMenu, setShowToggleMenu] = useState(false);
 
@@ -21,14 +23,12 @@ const HeaderNav = ({ showBrowse }) => {
 
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const modalClose = () => setShowShareModal(!showShareModal);
 
   const NavLinks = [
     {
@@ -90,28 +90,6 @@ const HeaderNav = ({ showBrowse }) => {
 
   return (
     <nav>
-      <Modal open={showShareModal} onClose={modalClose}>
-        <Box className="modal-share">
-          <Typography
-            component="div"
-            sx={{
-              display: 'block',
-              textAlign: 'center',
-              py: 2,
-              fontFamily: 'var(--ff-default)'
-            }}
-            variant="subtitle1"
-          >
-            Share about ReactPlay
-          </Typography>
-          <SocialShare showFB showLinkedin showReddit showTwitter />
-          <Box component="div" sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-            <button className="modal-share-close" onClick={modalClose}>
-              <GoX className="icon" size="16px" /> <span className="sr-only">Cancel</span>
-            </button>
-          </Box>
-        </Box>
-      </Modal>
       <button
         aria-expanded={showToggleMenu}
         aria-label="Toggle menu"
@@ -122,6 +100,7 @@ const HeaderNav = ({ showBrowse }) => {
         <span className="navbar-toggler-icon" />
       </button>
       <div className={showToggleMenu ? 'navbar-collapse show' : 'navbar-collapse'}>
+        <div className="navbar-collapse-overlay" onClick={() => setShowToggleMenu(false)} />
         <ul className="header-links" data-testid="header-links-container">
           <li className="menu-closer">
             <button
@@ -139,7 +118,7 @@ const HeaderNav = ({ showBrowse }) => {
               <Link
                 className="app-header-btn app-header-btn--secondary"
                 data-testid="browse-btn"
-                to="/plays"
+                href="/plays"
               >
                 <MdManageSearch className="icon" />
                 <span className="btn-label">Browse</span>
@@ -159,20 +138,19 @@ const HeaderNav = ({ showBrowse }) => {
           </li>
           <li className="menu-spacer">
             {process.env.NODE_ENV === 'development' ? (
-              <a
+              <Link
                 className="app-header-btn app-header-btn--primary"
                 data-testid="create-btn"
                 href="/plays/create"
-                rel="noopener noreferrer"
               >
                 <IoAddSharp className="icon" />
                 <span className="btn-label">Create</span>
-              </a>
+              </Link>
             ) : (
               <a
                 className="app-header-btn app-header-btn--primary"
                 data-testid="create-btn"
-                data-umami-event={UMAMI_EVENTS.CREATE_PLAY_BUTTON}
+                data-umami-event={UMAMI_EVENTS.CREATE_PLAY_BUTTON_CLICK}
                 href={PLAY_DOC_LINK}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -192,11 +170,10 @@ const HeaderNav = ({ showBrowse }) => {
                   className="app-header-btn app-header-btn--default"
                   data-testid={NavLink.testId}
                   data-umami-event={NavLink.event}
-                  href={NavLink.href}
+                  href={NavLink.href ?? NavLink.to}
                   rel="noopener noreferrer"
                   target="_blank"
                   title={NavLink.title}
-                  to={NavLink.to}
                   onClick={NavLink.onClick}
                 >
                   <Icon className={NavLink.iconClass} />
@@ -210,9 +187,8 @@ const HeaderNav = ({ showBrowse }) => {
               <h3 className="section-title">Show Love</h3>
               <button
                 className="my-2 btn-default-light"
-                href="#"
                 onClick={() => {
-                  modalClose();
+                  setShowShareModal(false);
                   handleClose();
                 }}
               >

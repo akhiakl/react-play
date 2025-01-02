@@ -1,7 +1,10 @@
-import { Modal } from 'common';
+'use client';
+import Modal from 'common/modal';
 import { useState, useEffect } from 'react';
 import './search.css';
-import { orderBy } from 'lodash';
+import orderBy from 'lodash/orderBy';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
 
 import useFetchFilterData from './hooks/usePlayFilter';
 
@@ -9,7 +12,6 @@ import { FIELD_TEMPLATE } from './filter-template';
 import { TextField, Checkbox, Autocomplete } from '@mui/material';
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import { GiSettingsKnobs } from 'react-icons/gi';
-import * as _ from 'lodash';
 
 const icon = <BiCheckbox size={30} />;
 const checkedIcon = <BiCheckboxChecked size={30} />;
@@ -64,7 +66,7 @@ const FilterPlays = ({ onChange, query }) => {
       } else {
         if (query[template.datafield]) {
           newFormData[template.datafield] = [];
-          const splitData = _.isArray(query[template.datafield])
+          const splitData = isArray(query[template.datafield])
             ? query[template.datafield]
             : query[template.datafield].split(',');
           splitData.forEach((data) => {
@@ -101,7 +103,7 @@ const FilterPlays = ({ onChange, query }) => {
     FIELD_TEMPLATE.forEach((template) => {
       if (formData[template.datafield]) {
         res[template.datafield] = [];
-        if (_.isArray(formData[template.datafield])) {
+        if (isArray(formData[template.datafield])) {
           formData[template.datafield].forEach((data) => {
             res[template.datafield].push(
               template.node ? data[template.node][template.fieldValue] : data[template.fieldValue]
@@ -205,7 +207,7 @@ const FilterPlays = ({ onChange, query }) => {
               if (field.multiple) {
                 updatedval = [];
                 newValue.forEach((v) => {
-                  if (_.isObject(v)) {
+                  if (isObject(v)) {
                     updatedval.push(v);
                   } else {
                     updatedval.push({

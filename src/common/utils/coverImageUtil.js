@@ -1,34 +1,38 @@
 import FallbackImage from 'images/play-fallback-cover.png';
-import { IMAGE_EXTENSIONS, FULFILLED_STATUS } from './utilsConstants';
+import { IMAGE_EXTENSIONS } from './utilsConstants';
 
 /**
  * Tries to dynamically import the image with the given extension for the specified play slug.
  *
  * @param {string} playSlug - The slug of the play.
  * @param {string} extension - The image extension (e.g., 'png', 'jpg').
- * @returns {Promise} - A promise that resolves with the image or rejects if not found.
+ * @returns {Promise<string|null>} - A promise that resolves with the image URL or null if not found.
  */
-const loadImageForExtension = (playSlug, extension) =>
-  import(`plays/${playSlug}/cover.${extension}`);
+const loadImageForExtension = async (playSlug, extension) => {
+  try {
+    const importFragment = `plays/${playSlug}/cover.${extension}`;
+    const imageModule = await import(importFragment);
+
+    return imageModule?.default || null;
+  } catch {
+    return null;
+  }
+};
 
 /**
- * Attempts to load the cover image for a play by trying multiple image formats.
+ * Attempts to load the cover image for a play by checking multiple image formats.
  * Falls back to a default image if none of the formats are available.
  *
  * @param {string} playSlug - The slug of the play.
- * @returns {Promise} - A promise that resolves to the cover image or the fallback image.
+ * @returns {Promise<string>} - A promise that resolves to the cover image or the fallback image.
  */
 export const loadCoverImage = async (playSlug) => {
-  // const imagePromises = supportedExtensions.map((extension) =>
-  const imagePromises = IMAGE_EXTENSIONS.map((extension) =>
-    loadImageForExtension(playSlug, extension)
-  );
+  for (const extension of IMAGE_EXTENSIONS) {
+    const image = await loadImageForExtension(playSlug, extension);
+    if (image) {
+      return image;
+    }
+  }
 
-  const results = await Promise.allSettled(imagePromises);
-
-  const image = results.find(
-    (result) => result.status === FULFILLED_STATUS && result.value?.default
-  );
-
-  return image?.value.default || FallbackImage;
+  return FallbackImage;
 };

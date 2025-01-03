@@ -25,7 +25,7 @@ export const getProdUrl = (path) => {
  *
  * @param {Array} obj
  * @param {String} key
- * @param {String} value
+ * @param {any} value
  * @returns Number
  */
 export default function countByProp(obj, key, value) {

@@ -3,7 +3,7 @@ import { ReactComponent as ImageOops } from 'images/img-oops.svg';
 import React, { Fragment, useEffect, useState } from 'react';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from 'common/spinner/spinner';
-import * as all_plays from 'plays';
+// import * as all_plays from 'plays';
 import { SORT_OPTIONS } from 'constants';
 import './playlist.css';
 import { toSanitized } from 'common/services/string';
@@ -11,6 +11,8 @@ import DynamicBanner from './DynamicBanner';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { ParseQuery, QueryDBTranslator } from 'common/search/search-helper';
 import { getPlaysByFilter } from 'common/services/plays';
+
+const all_plays = [];
 
 const PlayList = () => {
   const [randomPlay, setRandomPlay] = useState({});

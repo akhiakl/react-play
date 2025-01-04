@@ -187,7 +187,7 @@ const HeaderNav = ({ showBrowse }: Props) => {
               <button
                 className="my-2 btn-default-light"
                 onClick={() => {
-                  setShowShareModal(false);
+                  setShowShareModal(true);
                   handleClose();
                 }}
               >

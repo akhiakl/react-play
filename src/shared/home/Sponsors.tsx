@@ -1,6 +1,7 @@
 import { FaHandshake } from 'react-icons/fa';
 import { TbHeartHandshake } from 'react-icons/tb';
 import { RiHeartFill, RiHeartAddFill } from 'react-icons/ri';
+import Image from 'next/image';
 
 const eventSponsors = [
   {
@@ -59,7 +60,9 @@ const Sponsors = () => {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <img alt={p.name} src={p.logo} />
+                  <span className="relative w-full h-full">
+                    <Image fill alt={p.name} className="object-contain" src={p.logo} />
+                  </span>
                 </a>
               ))}
             </div>
@@ -85,7 +88,9 @@ const Sponsors = () => {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <img alt={s.name} src={s.logo} />
+                  <span className="relative w-full h-full">
+                    <Image fill alt={s.name} className="object-contain" src={s.logo} />
+                  </span>
                 </a>
               ))}
             </div>

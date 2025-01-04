@@ -171,8 +171,7 @@ const HeaderNav = ({ showBrowse }: Props) => {
                   data-testid={NavLink.testId}
                   data-umami-event={NavLink.event}
                   href={NavLink.href ?? NavLink.to}
-                  rel="noopener noreferrer"
-                  target="_blank"
+                  {...(NavLink.type !== 'Link' && { rel: 'noopener noreferrer', target: '_blank' })}
                   title={NavLink.title}
                   onClick={NavLink.onClick}
                 >

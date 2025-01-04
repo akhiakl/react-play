@@ -1,38 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import thumbPlay from 'images/thumb-play.png';
 import { Link } from 'react-router-dom';
 import { MdArrowRightAlt } from 'react-icons/md';
-import { loadCoverImage } from 'common/utils/coverImageUtil';
 const DynamicBanner = ({ randomPlay }) => {
-  const [coverImage, setCoverImage] = useState(null);
-
-  useEffect(() => {
-    async function setPlayCover() {
-      if (randomPlay && randomPlay.cover) {
-        setCoverImage(randomPlay.cover);
-      } else {
-        // if it is not passed as a meta data
-        // check in the play folder for a cover image with the name cover
-        const coverImage = await loadCoverImage(randomPlay.slug);
-        if (coverImage) {
-          setCoverImage(coverImage);
-        } else {
-          setCoverImage(thumbPlay);
-          console.error(
-            `Cover image not found for the play ${randomPlay.name}. Setting the default cover image...`
-          );
-        }
-      }
-    }
-    setPlayCover();
-  }, [randomPlay]);
-
   return (
     <Fragment>
       <div
         className="dynamic-banner-container"
         style={{
-          background: `linear-gradient(rgba(0,0,0,0.5), #020808),url(${coverImage} ) center/cover no-repeat`,
+          background: `linear-gradient(rgba(0,0,0,0.5), #020808),url(${randomPlay.cover} ) center/cover no-repeat`,
           minHeight: '50vh'
         }}
       >

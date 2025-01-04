@@ -9,3 +9,5 @@ export const UMAMI_EVENTS = Object.freeze({
 
 // Sorting Options for Plays
 export const SORT_OPTIONS = Object.freeze(['Newest', 'Oldest', 'Most Liked', 'Random']);
+
+export const SORT_COOKIE = 'play_sort_by';

@@ -1,7 +1,7 @@
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 
 type Props = {
-  onLikeClick: () => void;
+  onLikeClick?: () => void;
   likeObj: {
     liked: boolean;
     number: number;
@@ -11,9 +11,7 @@ type Props = {
 const Like = ({ onLikeClick = null, likeObj }: Props) => {
   const { liked, number } = likeObj;
 
-  const likeClickHandler = () => {
-    if (onLikeClick) return onLikeClick();
-  };
+  const likeClickHandler = () => onLikeClick?.();
 
   return (
     <button className="action counted -mr-0.5" onClick={likeClickHandler}>

@@ -2,33 +2,29 @@ import React from 'react';
 import { BsPlayCircleFill } from 'react-icons/bs';
 import { BiLogoTypescript, BiLogoJavascript } from 'react-icons/bi';
 import PlayShare from './PlayShare';
-import Like from '@/shared/components/Like';
 import userImage from '@/images/user.png';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlayInfo } from './types';
+import PlayLikes from './PlayLikes';
 
 type Props = {
-  likeObject: () => {
-    liked: boolean;
-    number: number;
-  };
   play: PlayInfo;
-  cover: string;
 };
 
-function PlayCard({ play, cover, likeObject }: Props) {
+function PlayCard({ play }: Props) {
   return (
     <Link href={`/plays/${encodeURI(play.github.toLowerCase())}/${play.slug}`}>
       <div className="play-card-container">
         <div className="play-thumb-container">
-          {cover && (
+          {play.cover && (
             <Image
               fill
               alt="Play cover image"
               className="play-card-thumb-img"
               priority={play.priority}
-              src={cover}
+              sizes="(max-width: 700px) 70vw, (max-width: 1052px) 33vw, 30vw"
+              src={play.cover}
             />
           )}
           <BsPlayCircleFill className="play-icon" color="white" size={80} />
@@ -57,10 +53,10 @@ function PlayCard({ play, cover, likeObject }: Props) {
         )}
         <div className="play-actions mt-4">
           <div className="like-container">
-            <Like likeObj={likeObject()} onLikeClick={null} />
+            <PlayLikes play={play} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <PlayShare
-                cover={cover}
+                cover={play.cover}
                 link={`/plays/${encodeURI(play.github.toLowerCase())}/${play.slug}`}
               />
               {play.language === 'ts' ? (

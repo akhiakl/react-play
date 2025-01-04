@@ -5,7 +5,7 @@ import { IoIosRocket } from 'react-icons/io';
 import { activities } from './activitiesConfig';
 import Image from 'next/image';
 import { UMAMI_EVENTS } from '@/constants';
-import { GitHubRepository } from '@/shared/github/types';
+import { GitHubRepository } from '@/actions/github/types';
 
 type Props = {
   currentActivity: string;

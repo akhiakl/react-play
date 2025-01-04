@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   title: 'ReactPlay - Plays'
 };
 
+export async function generateStaticParams(): Promise<any[]> {
+  return [];
+}
+
 export const revalidate = 1300;
 
 async function PlayListPage({ searchParams }: Props) {

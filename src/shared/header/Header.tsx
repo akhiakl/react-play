@@ -1,6 +1,6 @@
 'use client';
 import HeaderNav from './HeaderNav';
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import './header.css';
 import { SearchBox } from '@/shared/search/SearchBox';
 import { usePathname } from 'next/navigation';
@@ -73,7 +73,11 @@ const Header = () => {
           </Link>
         </span>
         <div className="app-header-search pl-0 xl:pl-[130px]">
-          {showHideBits.showSearch && <SearchBox />}
+          {showHideBits.showSearch && (
+            <Suspense>
+              <SearchBox />
+            </Suspense>
+          )}
         </div>
 
         <HeaderNav showBrowse={showHideBits.showBrowse} />

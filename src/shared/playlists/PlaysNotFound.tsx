@@ -2,6 +2,7 @@
 import React from 'react';
 import ImgOops from '@/images/ImgOops';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 const PlaysNotFound = () => {
   const searchParams = useSearchParams();
@@ -14,9 +15,9 @@ const PlaysNotFound = () => {
       {searchString ? (
         <p className="page-404-desc">
           You migh want to adjust the search criteria or{' '}
-          <a className="underline" href="/plays">
+          <Link className="underline" href="/plays">
             clear
-          </a>{' '}
+          </Link>{' '}
           it.
         </p>
       ) : (

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import './playlist.css';
 import DynamicBanner from './DynamicBanner';
 import { PlayInfo } from './types';
@@ -15,17 +15,23 @@ type Props = {
 
 const PlayList = ({ plays, randomPlay, sortBy: savedSortBy }: Props) => {
   if (plays?.length === 0) {
-    return <PlaysNotFound />;
+    return (
+      <Suspense>
+        <PlaysNotFound />
+      </Suspense>
+    );
   }
 
   return (
     <Fragment>
       {randomPlay && <DynamicBanner play={randomPlay} />}
-      <PlayListSortBy
-        defaultSortBy={savedSortBy}
-        totalResults={plays?.length}
-        onSortBy={setSortByValueInCookie}
-      />
+      <Suspense>
+        <PlayListSortBy
+          defaultSortBy={savedSortBy}
+          totalResults={plays?.length}
+          onSortBy={setSortByValueInCookie}
+        />
+      </Suspense>
       <ol className="list-plays">
         {plays?.map((play, index) => (
           <Fragment key={index}>

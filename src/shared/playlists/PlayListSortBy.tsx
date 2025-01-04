@@ -22,13 +22,11 @@ const PlayListSortBy = ({ defaultSortBy, totalResults, onSortBy }: Props) => {
 
   return (
     <>
-      {text ? (
+      {text && (
         <div className="search-summary">
           <b>{totalResults}</b>&nbsp;results for plays matching&nbsp;<b>{text}</b>
           &nbsp;sorted by&nbsp;<b>{sortBy}</b>
         </div>
-      ) : (
-        ''
       )}
       <div className="sort-by-plays-wrapper">
         Sort By :

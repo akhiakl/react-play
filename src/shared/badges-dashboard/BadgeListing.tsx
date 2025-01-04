@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import { NHOST } from '@/common/const';
 import ImgOops from '@/images/ImgOops';
 import Badge from './Badge';
 import BadgeDetails from './BadgeDetails';
 import { useAuthenticationStatus } from '@nhost/nextjs';
 import Link from 'next/link';
+import { NHOST } from '@/constants/nhost';
 
 type Props = {
   badges: any[];

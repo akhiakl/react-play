@@ -5,6 +5,8 @@ import './playIdeas.css';
 import { PLAY_DOC_LINK } from '@/constants';
 import { PlayIdeaFilter, PlayIdeaInfo } from './types';
 import PlayIdeaFilters from './PlayIdeaFilters';
+import { Suspense } from 'react';
+import Link from 'next/link';
 
 type Props = {
   ideas: PlayIdeaInfo[];
@@ -31,7 +33,9 @@ const PlayIdeas = ({ ideas, isError, filters }: Props) => {
               place. Here are some ideas to get you started.
             </p>
           </div>
-          <PlayIdeaFilters filters={filters} />
+          <Suspense>
+            <PlayIdeaFilters filters={filters} />
+          </Suspense>
         </div>
         <div className="playideas-body">
           <ul className="list-playideas">
@@ -44,14 +48,10 @@ const PlayIdeas = ({ ideas, isError, filters }: Props) => {
                 </p>
                 <div className="idea-actions">
                   {process.env.NODE_ENV === 'development' ? (
-                    <a
-                      className="btn-primary action-btn"
-                      href="/plays/create"
-                      rel="noopener noreferrer"
-                    >
+                    <Link className="btn-primary action-btn" href="/plays/create">
                       <IoAddSharp className="icon" />
                       <span className="btn-label">Create</span>
-                    </a>
+                    </Link>
                   ) : (
                     <a
                       className="btn-primary action-btn"

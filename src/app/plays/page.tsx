@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   title: 'ReactPlay - Plays'
 };
 
+export const revalidate = 1300;
+
 async function PlayListPage({ searchParams }: Props) {
   const query = await searchParams;
   const cookieStore = await cookies();

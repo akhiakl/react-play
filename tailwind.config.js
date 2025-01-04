@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -20,7 +21,19 @@ module.exports = {
       '2xl': { min: '1536px' }
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {}
+    extend: {
+      colors: {
+        'play-level-1': 'rgba(var(--color-play-level-1))',
+        'play-level-2': 'rgba(var(--color-play-level-2))',
+        'play-level-3': 'rgba(var(--color-play-level-3))'
+      },
+      fontSize: {
+        'fs-xs': 'var(--fs-xs)'
+      },
+      fontWeight: {
+        'fw-bold': 'var(--fw-bold)'
+      }
+    }
   },
   plugins: [require('tailwind-scrollbar')]
 };

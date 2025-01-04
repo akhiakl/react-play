@@ -12,6 +12,7 @@ import { FIELD_TEMPLATE, FieldTemplate } from './filter-template';
 import { TextField, Checkbox, Autocomplete } from '@mui/material';
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import { GiSettingsKnobs } from 'react-icons/gi';
+import Image from 'next/image';
 
 const icon = <BiCheckbox size={30} />;
 const checkedIcon = <BiCheckboxChecked size={30} />;
@@ -180,10 +181,12 @@ const FilterPlays = ({ onChange, query }: Props) => {
                   >
                     {field.avatar && getOptionNode(field, option)[field.avatar] ? (
                       <span className="flex items-center justify-center md-h-12 h-8 md-w-16 w-8 mr-4">
-                        <img
+                        <Image
                           alt="avatar"
                           className="md-h-12 w-8 md-w-12 h-8 rounded-full"
+                          height={48}
                           src={getOptionNode(field, option)[field.avatar]}
+                          width={48}
                         />
                       </span>
                     ) : null}

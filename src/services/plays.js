@@ -2,8 +2,8 @@ import { submit, submitMutation } from './request';
 import { deleteATagQuery } from './request/query';
 import { associatePlayWithTagQuery, createPlayQuery } from './request/query/play';
 import { toKebabCase, toSlug } from './string';
-import { FetchPlaysByFilter } from 'common/services/request/query/fetch-plays';
-import { toTitleCaseTrimmed } from 'common/services/string';
+import { FetchPlaysByFilter } from './request/query/fetch-plays';
+import { toTitleCaseTrimmed } from './string';
 import { Tags } from './tags';
 
 // Create a play

@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 import { Modal, Box, Typography } from '@mui/material';
-import SocialShare from 'common/components/SocialShare';
+import SocialShare from '@/shared/components/SocialShare';
 import { GoX } from 'react-icons/go';
-import { useSearchContext } from 'common/search/search-context';
+import { useSearchContext } from '@/shared/search/search-context';
 
 const SharePlayButton = () => {
   const { showShareModal, setShowShareModal } = useSearchContext();

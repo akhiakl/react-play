@@ -8,7 +8,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:@next/next/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -19,12 +20,12 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['react-hooks', 'react', '@typescript-eslint', 'prettier'],
-  ignorePatterns: ['**/plays/index.js'],
+  ignorePatterns: ['**/plays/index.js', 'src/plays/**/*', 'src/common/**/*'],
 
   rules: {
-      // Note: you must disable the base rule as it can report incorrect errors
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    // Note: you must disable the base rule as it can report incorrect errors
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
 
     'import/extensions': 0,
 

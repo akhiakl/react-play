@@ -1,4 +1,4 @@
-import { PLAY_DOC_LINK } from 'constants/index';
+import { PLAY_DOC_LINK } from '@/constants';
 import LogoLight from './LogoLight';
 import { BsGithub } from 'react-icons/bs';
 import { FaDiscord, FaLinkedin, FaMeetup } from 'react-icons/fa';
@@ -7,6 +7,7 @@ import { IoAddSharp, IoLogoRss } from 'react-icons/io5';
 import { MdManageSearch } from 'react-icons/md';
 import Link from 'next/link';
 import SharePlayButton from './SharePlayButton';
+import NetlifyLogo from '@/images/NetlifyLogo';
 
 const ExtendedFooter = () => {
   const navLinks = [
@@ -157,11 +158,7 @@ const ExtendedFooter = () => {
               </div>
               <p className="mt-4 mx-auto">
                 <a className="inline-block" href="https://www.netlify.com">
-                  {' '}
-                  <img
-                    alt="Deploys by Netlify"
-                    src="https://www.netlify.com/v3/img/global/badges/netlify-color-accent.svg"
-                  />{' '}
+                  <NetlifyLogo />
                 </a>
               </p>
             </div>

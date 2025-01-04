@@ -28,7 +28,7 @@ export const getProdUrl = (path: string) => {
  * @param {String} value
  * @returns Number
  */
-export default function countByProp(obj: Array<any>, key: string, value: string) {
+export default function countByProp(obj: Array<any>, key: string, value: any) {
   return obj.reduce((acc, item) => (item?.[key] === value ? ++acc : acc), 0);
 }
 

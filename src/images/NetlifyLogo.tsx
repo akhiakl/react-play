@@ -11,9 +11,9 @@ const NetlifyLogo = (props: SVGProps<SVGSVGElement>) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path d="M0 0h114v51H0z" fill="#0C2A2A" />
-        <g clip-path="url(#b)">
+        <g clipPath="url(#b)">
           <path
             d="M44.445 40.302v-7.695l.153-.16h1.853l.154.16v7.695l-.154.16h-1.853l-.153-.16ZM44.445 17.855v-7.696l.153-.159h1.853l.154.16v7.695l-.154.16h-1.853l-.153-.16ZM38.068 34.892h-.254l-1.275-1.323v-.264l2.388-2.482 1.349.002.18.185v1.4l-2.388 2.482ZM36.54 17.227v-.267l1.274-1.32h.254l2.388 2.479v1.398l-.18.19h-1.349l-2.388-2.48ZM28.154 24.107h10.5l.153.16v1.926l-.153.16h-10.5l-.154-.16v-1.927l.154-.16ZM99.844 24.11l.154.159v1.924l-.154.16H89.19l-.153-.16.77-1.924.154-.16h9.883Z"
             fill="#32E6E2"
@@ -29,7 +29,7 @@ const NetlifyLogo = (props: SVGProps<SVGSVGElement>) => {
           fill="#0C2A2A"
         />
       </g>
-      <rect height="48" rx="3" stroke="#32E6E2" stroke-width="2" width="112" x="1" y="1" />
+      <rect height="48" rx="3" stroke="#32E6E2" strokeWidth="2" width="112" x="1" y="1" />
       <defs>
         <clipPath id="a">
           <rect fill="#fff" height="50" rx="4" width="114" />

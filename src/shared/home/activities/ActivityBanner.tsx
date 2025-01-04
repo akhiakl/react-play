@@ -55,13 +55,15 @@ function ActivityBanner({ currentActivity, githubRepo }: Props) {
           target="_blank"
         >
           <BsGithub className="icon" />
-          <span className="btn-label">
-            GitHub{' '}
-            <div className="label-info-more">
-              <FiStar />{' '}
-              <div className="more-label">{formatter.format(githubRepo?.stargazers_count)}</div>
-            </div>{' '}
-          </span>
+          {githubRepo?.stargazers_count && (
+            <span className="btn-label">
+              GitHub
+              <div className="label-info-more">
+                <FiStar />
+                <div className="more-label">{formatter.format(githubRepo?.stargazers_count)}</div>
+              </div>
+            </span>
+          )}
         </a>
       </div>
       <div className="relative h-80 md:h-96 w-full my-0 mx-auto md:order-2">

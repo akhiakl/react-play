@@ -1,19 +1,19 @@
-import PlayThumbnail from './PlayThumbnail';
-import useFeaturedPlays from '@/shared/hooks/useFeaturedPlays';
+import PlayCard from './PlayCard';
+import { PlayInfo } from './types';
+import './playlist.css';
 
-const FeaturedPlays = () => {
-  const { loading, error, data } = useFeaturedPlays();
-  const success = !loading && !error && !!data.length;
+type Props = {
+  plays: PlayInfo[];
+};
 
+const FeaturedPlays = ({ plays }: Props) => {
   return (
     <>
       <h2 className="plays-title-primary">
         Trending <strong>Plays</strong>
       </h2>
       <ul className="list-plays">
-        {loading && <p>Loading...</p>}
-        {error && <p>{error?.message ?? 'Something went wrong'}</p>}
-        {success && data?.map((play, index) => <PlayThumbnail key={index} play={play} />)}
+        {plays?.map((play, index) => <PlayCard key={index} play={play} />)}
       </ul>
     </>
   );

@@ -4,6 +4,8 @@ import { toSanitized } from '@/services/string';
 import { PlayInfo } from '@/shared/playlists/types';
 import { QueryDBTranslator } from '@/shared/search/search-helper';
 import { resolveImageData } from './utitls/image';
+import { submit } from '@/services/request';
+import { FetchPlaysFilter } from '@/services/request/query/fetch-plays-filter';
 
 type QueryParams = { [key: string]: string | string[] | undefined };
 
@@ -52,4 +54,29 @@ export const getPlays = async (query: QueryParams, sortBy: string) => {
     plays: coveredPlays,
     randomPlay
   };
+};
+
+export const getFeaturedPlays = async (): Promise<PlayInfo[]> => {
+  const { getAllFeaturedPlays } = FetchPlaysFilter;
+
+  try {
+    const plays: PlayInfo[] = (await submit(getAllFeaturedPlays())) ?? [];
+
+    // Resolve missing covers
+    const coverData = await Promise.all(
+      plays?.filter((play) => !play.cover).map((play) => resolveImageData(play.slug))
+    );
+
+    // Merge resolved covers into plays
+    const coveredPlays = plays.map((play) => ({
+      ...play,
+      cover: coverData.find((cover) => cover.slug === play.slug)?.image || play.cover
+    }));
+
+    return coveredPlays;
+  } catch (err) {
+    console.error(err);
+
+    return [];
+  }
 };

@@ -4,7 +4,7 @@ import HomeBanner from '@/shared/home/HomeBanner';
 import HomeContent from '@/shared/home/HomeContent';
 import HomeContributors from '@/shared/home/HomeContributors';
 import HomeFeatures from '@/shared/home/HomeFeatures';
-// import HomePlays from '@/shared/home/HomePlays';
+import HomePlays from '@/shared/home/HomePlays';
 import HomeIdeas from '@/shared/home/HomeIdeas';
 import HomeSponsors from '@/shared/home/HomeSponsors';
 import HomeTestimonials from '@/shared/home/HomeTestimonials';
@@ -21,7 +21,7 @@ const HomePage = () => {
         <HomeFeatures />
         <HomeIdeas />
       </section>
-      {/* <HomePlays /> */}
+      <HomePlays />
       <HomeTestimonials />
       <HomeContributors />
       <HomeSponsors />

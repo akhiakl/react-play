@@ -4,7 +4,7 @@ import { FiStar } from 'react-icons/fi';
 import { MdManageSearch } from 'react-icons/md';
 import { UMAMI_EVENTS } from '@/constants';
 import Link from 'next/link';
-import { GitHubRepository } from '@/shared/github/types';
+import { GitHubRepository } from '@/actions/github/types';
 
 type Props = {
   githubRepo: GitHubRepository;

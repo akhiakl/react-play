@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
     "jsx": "preserve",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "esnext",
-    "lib": [
-      "es2022",
-      "ES6",
-      "DOM"
-    ],
+    "lib": ["es2022", "ES6", "DOM"],
     "target": "es6",
     "allowJs": true,
     "moduleResolution": "node",
@@ -26,7 +22,10 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     "./build/types/**/*.ts",
@@ -35,7 +34,5 @@
     "src/globals.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

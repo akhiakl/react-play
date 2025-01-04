@@ -1,7 +1,7 @@
 import React from 'react';
 import './search.css';
 import debounce from 'lodash/debounce';
-import useQueryParams from 'common/hooks/useQueryParams';
+import useQueryParams from '@/shared/hooks/useQueryParams';
 
 type Props = {
   ref?: React.MutableRefObject<HTMLInputElement>;

@@ -1,32 +1,30 @@
-'use client';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import FilterPlays from './FilterPlays';
+import SearchPlays from './SearchPlays';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ParseQuery } from './search-helper';
 import { BiSearch } from 'react-icons/bi';
 import { AiOutlineClose } from 'react-icons/ai';
-import debounce from 'lodash/debounce';
-import useQueryParams from 'common/hooks/useQueryParams';
 
 export const SearchBox = ({ reset }) => {
   const [query, setQuery] = useState({});
-  const searchInput = useRef < HTMLInputElement > null;
-
-  const queryParams = useQueryParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const p_query = ParseQuery(location.search) || {};
+    setQuery(p_query);
+  }, [location.pathname, location.search]);
 
   const onChange = (query) => {
     setQuery(query);
-    // const query_str = new URLSearchParams(query).toString();
-    // router.push(`/plays?${query_str}`);
+    const query_str = new URLSearchParams(query).toString();
+    navigate(`/plays?${query_str}`);
   };
 
   const onClearFilter = () => {
     setQuery({});
-    searchInput?.current?.reset?.();
-    queryParams.removeAll('/plays');
+    navigate(`/plays`);
   };
-
-  const handleSearch = debounce((value) => {
-    queryParams.set('text', value, '/plays');
-  }, 500);
 
   return (
     <div className="filter">
@@ -35,17 +33,7 @@ export const SearchBox = ({ reset }) => {
         data-testid="plays-search-box-container"
       >
         <BiSearch className="mr-2" data-testid="plays-search-box-icon" size="24px" />
-        <input
-          className="search-input-text"
-          data-testid="plays-search-box-input-field"
-          defaultValue={queryParams?.get('text')?.toString()}
-          placeholder="Search for play(s)..."
-          ref={searchInput}
-          type="text"
-          onChange={(e) => {
-            handleSearch(e.target.value);
-          }}
-        />
+        <SearchPlays query={query} reset={reset} onChange={(q) => onChange(q)} />
         {query && Object.keys(query).length > 0 ? (
           <button
             className="btn-filter"

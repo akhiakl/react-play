@@ -8,7 +8,7 @@ import { IMAGE_EXTENSIONS, FULFILLED_STATUS } from './utilsConstants';
  * @param {string} extension - The image extension (e.g., 'png', 'jpg').
  * @returns {Promise} - A promise that resolves with the image or rejects if not found.
  */
-const loadImageForExtension = (playSlug, extension) =>
+const loadImageForExtension = (playSlug: string, extension: string): Promise<any> =>
   import(`plays/${playSlug}/cover.${extension}`);
 
 /**
@@ -18,7 +18,7 @@ const loadImageForExtension = (playSlug, extension) =>
  * @param {string} playSlug - The slug of the play.
  * @returns {Promise} - A promise that resolves to the cover image or the fallback image.
  */
-export const loadCoverImage = async (playSlug) => {
+export const loadCoverImage = async (playSlug: string): Promise<any> => {
   // const imagePromises = supportedExtensions.map((extension) =>
   const imagePromises = IMAGE_EXTENSIONS.map((extension) =>
     loadImageForExtension(playSlug, extension)
@@ -26,9 +26,9 @@ export const loadCoverImage = async (playSlug) => {
 
   const results = await Promise.allSettled(imagePromises);
 
-  const image = results.find(
+  const image: any = results.find(
     (result) => result.status === FULFILLED_STATUS && result.value?.default
   );
 
-  return image?.value.default || FallbackImage;
+  return image?.value?.default || FallbackImage;
 };

@@ -1,10 +1,10 @@
 /**
  *
- * @param {String} optionText
+ * @param {Object} optionText
  * @param {String} searchText
  * @returns Boolean
  */
-export const compareTextValue = (optionText, searchText) => {
+export const compareTextValue = (optionText: any, searchText: string) => {
   if (typeof optionText === 'string') {
     return optionText.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
   }
@@ -17,7 +17,7 @@ export const compareTextValue = (optionText, searchText) => {
  * @param {String} path cover path
  * @returns String
  */
-export const getProdUrl = (path) => {
+export const getProdUrl = (path: string) => {
   return `https://reactplay.io${path}`;
 };
 
@@ -28,7 +28,7 @@ export const getProdUrl = (path) => {
  * @param {String} value
  * @returns Number
  */
-export default function countByProp(obj, key, value) {
+export default function countByProp(obj: Array<any>, key: string, value: string) {
   return obj.reduce((acc, item) => (item?.[key] === value ? ++acc : acc), 0);
 }
 
@@ -39,18 +39,19 @@ export default function countByProp(obj, key, value) {
  * @param {string} dateString A date string in ISO 8601 format.
  * @returns {string} A formatted date string.
  */
-export function formatDate(dateString) {
+export function formatDate(dateString: string): string {
   if (!dateString) {
     return '';
   }
 
-  const [datePart] = dateString.split('T');
-  const [year, month, day] = datePart.split('-');
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    return ''; // Invalid date
+  }
 
-  // Convert the month number to the month name
-  const monthName = Date(year, month, day).split(' ');
+  const day = date.getDate().toString().padStart(2, '0');
+  const year = date.getFullYear();
+  const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
 
-  const formattedDate = `Joined ${day} ${monthName[1]} ${year}`;
-
-  return formattedDate;
+  return `Joined ${day} ${monthName} ${year}`;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
-// import * as plays from 'plays';
+import * as plays from 'plays';
 import { useParams } from 'react-router-dom';
 import { submit } from 'common/services/request';
 import Loader from 'common/spinner/spinner';
@@ -10,8 +10,6 @@ import { PageNotFound } from 'common';
 import thumbPlay from 'images/thumb-play.png';
 import { getProdUrl } from 'common/utils/commonUtils';
 import { loadCoverImage } from 'common/utils/coverImageUtil';
-
-const plays = [];
 
 function PlayMeta() {
   const [loading, setLoading] = useState(true);

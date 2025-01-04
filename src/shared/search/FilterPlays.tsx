@@ -1,23 +1,30 @@
-import { Modal } from 'common';
+'use client';
+import Modal from '@/shared/modal';
 import { useState, useEffect } from 'react';
 import './search.css';
-import { orderBy } from 'lodash';
+import orderBy from 'lodash/orderBy';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
 
 import useFetchFilterData from './hooks/usePlayFilter';
 
-import { FIELD_TEMPLATE } from './filter-template';
+import { FIELD_TEMPLATE, FieldTemplate } from './filter-template';
 import { TextField, Checkbox, Autocomplete } from '@mui/material';
 import { BiCheckbox, BiCheckboxChecked } from 'react-icons/bi';
 import { GiSettingsKnobs } from 'react-icons/gi';
-import * as _ from 'lodash';
 
 const icon = <BiCheckbox size={30} />;
 const checkedIcon = <BiCheckboxChecked size={30} />;
 
-const FilterPlays = ({ onChange, query }) => {
+type Props = {
+  onChange: (args: Record<string, any>) => void;
+  query: Record<string, string | string[]>;
+};
+
+const FilterPlays = ({ onChange, query }: Props) => {
   const [loading, error, data] = useFetchFilterData();
-  const [loadedData, setLoadedData] = useState({});
-  const [formData, setFormData] = useState({});
+  const [loadedData, setLoadedData] = useState<Record<string, any>>({});
+  const [formData, setFormData] = useState<Record<string, any>>({});
 
   const [showModal, setShowModal] = useState(false);
 
@@ -55,28 +62,26 @@ const FilterPlays = ({ onChange, query }) => {
   };
 
   const loadFilter = () => {
-    const newFormData = {};
+    const newFormData: Record<string, any> = {};
     FIELD_TEMPLATE.forEach((template) => {
       if (template.datafield === 'text') {
-        const text = query && query.text ? query.text.split('+').join(' ') : '';
+        const text = (query?.text as string)?.split('+').join(' ') ?? '';
 
         newFormData['text'] = decodeURIComponent(text);
       } else {
         if (query[template.datafield]) {
           newFormData[template.datafield] = [];
-          const splitData = _.isArray(query[template.datafield])
-            ? query[template.datafield]
-            : query[template.datafield].split(',');
+          const splitData = isArray(query[template.datafield])
+            ? (query[template.datafield] as string[])
+            : (query[template.datafield] as string).split(',');
           splitData.forEach((data) => {
-            const found =
-              loadedData[template.datafield] &&
-              loadedData[template.datafield].filter((d) => {
-                if (template.node) {
-                  return d[template.node][template.fieldValue] === data;
-                } else {
-                  return d[template.fieldValue] === data;
-                }
-              })[0];
+            const found = loadedData[template.datafield]?.filter((d: any) => {
+              if (template.node) {
+                return d[template.node][template.fieldValue] === data;
+              } else {
+                return d[template.fieldValue] === data;
+              }
+            })[0];
             if (found) {
               newFormData[template.datafield].push(found);
             }
@@ -97,12 +102,12 @@ const FilterPlays = ({ onChange, query }) => {
   };
 
   const handleFilter = () => {
-    const res = {};
+    const res: Record<string, any> = {};
     FIELD_TEMPLATE.forEach((template) => {
       if (formData[template.datafield]) {
         res[template.datafield] = [];
-        if (_.isArray(formData[template.datafield])) {
-          formData[template.datafield].forEach((data) => {
+        if (isArray(formData[template.datafield])) {
+          formData[template.datafield].forEach((data: any) => {
             res[template.datafield].push(
               template.node ? data[template.node][template.fieldValue] : data[template.fieldValue]
             );
@@ -113,7 +118,7 @@ const FilterPlays = ({ onChange, query }) => {
       }
     });
 
-    const finalQueryObject = {};
+    const finalQueryObject: Record<string, any> = {};
     Object.keys(res).forEach((key) => {
       if (res[key] && res[key].length) {
         finalQueryObject[key] = res[key];
@@ -123,7 +128,7 @@ const FilterPlays = ({ onChange, query }) => {
     onChange({ ...finalQueryObject });
   };
 
-  const handleChange = (key, value) => {
+  const handleChange = (key: string, value: string) => {
     setFormData((pre) => ({ ...pre, [key]: value }));
   };
 
@@ -131,7 +136,7 @@ const FilterPlays = ({ onChange, query }) => {
     return <p />;
   }
 
-  const getOptionNode = (field, option) => {
+  const getOptionNode = (field: FieldTemplate, option: any) => {
     if (field.node) {
       return option[field.node];
     }
@@ -139,7 +144,7 @@ const FilterPlays = ({ onChange, query }) => {
     return option;
   };
 
-  const renderFiled = (field) => {
+  const renderFiled = (field: FieldTemplate) => {
     switch (field.type) {
       case 'select':
         return (
@@ -204,8 +209,8 @@ const FilterPlays = ({ onChange, query }) => {
               let updatedval = newValue;
               if (field.multiple) {
                 updatedval = [];
-                newValue.forEach((v) => {
-                  if (_.isObject(v)) {
+                newValue.forEach((v: any) => {
+                  if (isObject(v)) {
                     updatedval.push(v);
                   } else {
                     updatedval.push({

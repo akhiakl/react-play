@@ -7,8 +7,8 @@ import { BiMoney } from 'react-icons/bi';
 import { IoAddSharp, IoShareSocial, IoHeartSharp } from 'react-icons/io5';
 import { MdManageSearch, MdClose, MdEvent } from 'react-icons/md';
 import { Box, Menu } from '@mui/material';
-import { PLAY_DOC_LINK, UMAMI_EVENTS } from 'constants/index';
-import { useSearchContext } from 'common/search/search-context';
+import { PLAY_DOC_LINK, UMAMI_EVENTS } from '@/constants';
+import { useSearchContext } from '@/shared/search/search-context';
 
 type Props = {
   showBrowse?: boolean;

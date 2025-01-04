@@ -11,3 +11,5 @@ declare module '*.svg' {
   const value: string;
   export = value;
 }
+
+declare module 'json-graphql-parser/v2/index.js';

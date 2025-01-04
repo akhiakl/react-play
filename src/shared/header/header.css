@@ -185,7 +185,7 @@
     left: 0;
   }
 
-  .navbar-collapse.show:before {
+  .navbar-collapse.show .navbar-collapse-overlay {
     content: '';
     background-color: var(--color-neutral-90);
     position: fixed;

@@ -2,16 +2,16 @@
 import HeaderNav from './HeaderNav';
 import { useMemo } from 'react';
 import './header.css';
-import { SearchBox } from 'common/search/SearchBox';
+import { SearchBox } from '@/shared/search/SearchBox';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import ActivityCountdown from './ActivityCountdown';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const Header = () => {
   const pathName = usePathname();
 
-  const reset = { search: false, filter: false };
+  // const reset = { search: false, filter: false };
 
   const showHideBits = useMemo(() => {
     // if (pathName !== '/plays') {
@@ -58,7 +58,7 @@ const Header = () => {
         <ActivityCountdown date={new Date(1675209600000)} />
       )}
       <header
-        className={classNames('app-header', {
+        className={clsx('app-header', {
           'app-header-home': !showHideBits.setHeaderStyle,
           'app-header-home--promo':
             !showHideBits.setHeaderStyle &&
@@ -73,7 +73,7 @@ const Header = () => {
           </Link>
         </span>
         <div className="app-header-search pl-0 xl:pl-[130px]">
-          {showHideBits.showSearch && <SearchBox reset={reset} />}
+          {showHideBits.showSearch && <SearchBox />}
         </div>
 
         <HeaderNav showBrowse={showHideBits.showBrowse} />

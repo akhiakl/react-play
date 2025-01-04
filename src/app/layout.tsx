@@ -2,10 +2,10 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Poppins, Quicksand, Raleway } from 'next/font/google';
 import './index.css';
-import Header from 'common/header/Header';
-import { SearchContextProvider } from 'common/search/search-context';
-import Footer from 'common/footer/Footer';
-import Nhost from 'common/nhost/Nhost';
+import Header from '@/shared/header/Header';
+import { SearchContextProvider } from '@/shared/search/search-context';
+import Footer from '@/shared/footer/Footer';
+import Nhost from '@/shared/nhost/Nhost';
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -36,16 +36,37 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'ReactPlay - One app to learn, create, and share ReactJS projects.',
+  title: 'ReactPlay - One app to learn, create, and share ReactJS projects',
   metadataBase: new URL('https://reactplay.io'),
+  description:
+    'ReactPlay is an open-source application to learn, create, and share ReactJS projects with the developer community.',
   alternates: {
     canonical: '/'
   },
   openGraph: {
-    type: 'website'
+    type: 'website',
+    siteName: 'ReactPlay',
+    images: [
+      {
+        url: 'https://reactplay.io/og-image.png',
+        width: 1200,
+        height: 628,
+        alt: 'Start React Code Arena with ReactPlay',
+        type: 'image/png'
+      }
+    ],
+    description:
+      'ReactPlay is an open-source application to learn, create and share ReactJS projects with the developer community.',
+    title: 'ReactPlay - One app to learn, create, and share ReactJS projects',
+    url: 'https://reactplay.io'
   },
   twitter: {
-    site: '@ReactPlayIO'
+    site: '@ReactPlayIO',
+    card: 'summary_large_image',
+    title: 'ReactPlay - One app to learn, create, and share ReactJS projects',
+    description:
+      'ReactPlay is an open-source application to learn, create and share ReactJS projects with the developer community.',
+    images: ['https://reactplay.io/og-image.png']
   }
 };
 

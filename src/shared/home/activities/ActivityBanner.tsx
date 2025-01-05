@@ -14,8 +14,8 @@ type Props = {
 
 function ActivityBanner({ currentActivity, githubRepo }: Props) {
   const formatter = Intl.NumberFormat('en', { notation: 'compact' });
-  const activity = activities.filter((a) => a.id === currentActivity);
-  const { name, subtitle, description, logo, heroImage } = activity[0];
+  const activity = activities.find((a) => a.id === currentActivity);
+  const { name, subtitle, description, logo, heroImage } = activity;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 justify-between w-[98%]  max-w-[600px]  md:max-w-[992px] lg:max-w-[1200px] mt-16 m-auto text-white">
@@ -70,9 +70,9 @@ function ActivityBanner({ currentActivity, githubRepo }: Props) {
         <Image
           fill
           priority
-          alt=""
+          alt="Hero image"
           className="object-[100%_center] lg:object-[90%_center] object-contain"
-          loading="eager"
+          sizes="(max-width: 768px) 100vw, 40vw"
           src={heroImage}
         />
       </div>

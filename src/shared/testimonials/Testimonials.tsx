@@ -23,19 +23,18 @@ const Testimonials = ({ testimonials }: Props) => {
 
       <div className="mx-auto max-w-[1600px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-6">
-          {testimonials &&
-            testimonials.map((testimonial) => (
-              <div className="border rounded-lg" key={testimonial.id}>
-                <TestimonialCard
-                  avatarUrl={testimonial.user_id_map.avatarUrl}
-                  category={testimonial.testimonials_event.name}
-                  created_at={testimonial.created_at}
-                  email={testimonial.user_id_map.email}
-                  name={testimonial.user_id_map.displayName}
-                  quote={testimonial.quote}
-                />
-              </div>
-            ))}
+          {testimonials?.map((testimonial) => (
+            <div className="border rounded-lg" key={testimonial.id}>
+              <TestimonialCard
+                avatarUrl={testimonial.user_id_map.avatarUrl}
+                category={testimonial.testimonials_event.name}
+                created_at={testimonial.created_at}
+                email={testimonial.user_id_map.email}
+                name={testimonial.user_id_map.displayName}
+                quote={testimonial.quote}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

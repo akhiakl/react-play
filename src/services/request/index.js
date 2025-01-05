@@ -1,4 +1,4 @@
-import { submit as gsubmit, submit_multi as gsubmit_multi } from 'json-graphql-parser/v2/index.js';
+import { submit as gsubmit, submit_multi as gsubmit_multi } from '../graphql-parser';
 import axios from 'axios';
 
 const BACKEND_URL = `${process.env.NEXT_PUBLIC_NHOST_BACKEND_URL}/${process.env.NEXT_PUBLIC_NHOST_VERSION}/${process.env.NEXT_PUBLIC_NHOST_ENDPOINT}`;

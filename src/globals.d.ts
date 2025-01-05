@@ -12,4 +12,4 @@ declare module '*.svg' {
   export = value;
 }
 
-declare module 'json-graphql-parser/v2/index.js';
+declare module 'json-graphql-parser/*';

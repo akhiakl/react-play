@@ -21,7 +21,7 @@ const useFetchFilterData = () => {
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
 
-  const dataConstructor = (data: [any, any, any]) => {
+  const dataConstructor = (data: any[]) => {
     const [tags, levels, creators] = data;
     const structuredTags = extractTags(tags);
 

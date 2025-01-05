@@ -95,6 +95,9 @@ importers:
       json-graphql-parser:
         specifier: ^0.1.9
         version: 0.1.9(axios@1.7.9)
+      jsonschema:
+        specifier: ^1.4.1
+        version: 1.4.1
       jspdf:
         specifier: ^2.5.1
         version: 2.5.2
